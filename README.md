@@ -1,6 +1,6 @@
 # Weather App
 
- This application is developed in React Native. In this application, It displays 5 coming days weather with temprature. This app is having two screens.
+This application is developed in React Native with redux toolkit. In this application, It displays 5 coming day's weather with temprature as per user's current      location. This app is having two screens.
  - Login Screen
  - Dashboard
  
