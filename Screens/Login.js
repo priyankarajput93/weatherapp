@@ -2,9 +2,6 @@ import { TextInput, StyleSheet, View, Text, Image, KeyboardAvoidingView, Touchab
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { GlobalStyles } from "../Utils/Styles";
-//import Button from "../ui/Button";
-//import { addUserName, addUserPassword } from "../redux/Reducers";
-//import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import Button from "../UI/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -29,15 +26,12 @@ function Login({ navigation }) {
         }
     };
 
-    useEffect(() => {
-        storeUser();
-    }, []);
-
     function login() {
         if (enteredName === "" && enteredPassword === "") {
 
         } else {
-         //   navigation.navigate("Dashboard")
+            storeUser();
+            navigation.navigate("Dashboard")
         }
     }
     const formIsInvalid = enteredName === "" || enteredPassword === "";
@@ -49,7 +43,6 @@ function Login({ navigation }) {
                 <SafeAreaView style={styles.container}>
                     <Image
                         style={styles.image}
-                    //  source={require('../assets/images/quiz.png')}
                     />
                     <TextInput
                         style={styles.input}
@@ -66,10 +59,10 @@ function Login({ navigation }) {
                     />
 
                     <View style={styles.buttonStyle}>
-                        <Button 
-                        isEnable={formIsInvalid} 
-                        style={styles.buttonText} 
-                        onPress={login}>Login</Button>
+                        <Button
+                            isEnable={formIsInvalid}
+                            style={styles.buttonText}
+                            onPress={login}>Login</Button>
                     </View>
                 </SafeAreaView>
             </TouchableWithoutFeedback>
@@ -95,16 +88,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontStyle: 'bold',
         padding: 2,
-        
-        //    color: GlobalStyles.colors.gray100
     },
     buttonStyle: {
         width: '80%',
         marginTop: 20,
         marginHorizontal: 30,
         marginVertical: 20,
-        borderRadius:16,
-        margin:10
+        borderRadius: 16,
+        margin: 10
     },
     image: {
         height: 64,

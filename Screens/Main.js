@@ -1,8 +1,6 @@
 
 import { useDispatch } from "react-redux";
-
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./Login";
 import { clearData } from "../redux/Reducers";
@@ -52,8 +50,7 @@ function Main() {
     return (
         <NavigationContainer theme={appTheme} >
             <Stack.Navigator
-              // initialRouteName={(currentUser !== null) ? "Login" : "Dashboard"}
-                initialRouteName="Login"
+                initialRouteName={(currentUser !== null) ? "Login" : "Dashboard"}
                 screenOptions={{
                     headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
                     headerTintColor: 'white',
@@ -62,13 +59,15 @@ function Main() {
                     options={{ headerShown: false }} />
                 <Stack.Screen name="Dashboard" component={Dashboard}
                     options={({ navigation }) => ({
-                        //   headerShown: false,
                         headerBackVisible: false,
                         headerRight: () => (
                             <Button
                                 onPress={() => {
                                     clearAppData();
-                                    navigation.popToTop();
+                                    navigation.reset({
+                                        index: 0,
+                                        routes: [{name: 'Login'}],
+                                      });
                                 }}
                                 title="Logout"
                                 color={GlobalStyles.colors.primary500}
