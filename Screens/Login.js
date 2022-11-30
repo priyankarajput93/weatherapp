@@ -11,6 +11,7 @@ function Login({ navigation }) {
 
     const enteredName = useSelector(state => state.appReducer.userName);
     const enteredPassword = useSelector(state => state.appReducer.userPassword);
+    const formIsInvalid = enteredName === "" || enteredPassword === "";
 
     const dispatch = useDispatch();
 
@@ -27,19 +28,16 @@ function Login({ navigation }) {
     };
 
     function login() {
-        if (enteredName === "" && enteredPassword === "") {
-
-        } else {
-            storeUser();
-            navigation.navigate("Dashboard")
-        }
+        storeUser();
+        navigation.navigate("Dashboard")
     }
-    const formIsInvalid = enteredName === "" || enteredPassword === "";
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={{ flex: 1 }}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <TouchableWithoutFeedback
+                onPress={Keyboard.dismiss}>
                 <SafeAreaView style={styles.container}>
                     <Image
                         style={styles.image}
@@ -58,7 +56,8 @@ function Login({ navigation }) {
                         secureTextEntry={true}
                     />
 
-                    <View style={styles.buttonStyle}>
+                    <View
+                        style={styles.buttonStyle}>
                         <Button
                             isEnable={formIsInvalid}
                             style={styles.buttonText}

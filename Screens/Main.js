@@ -55,9 +55,13 @@ function Main() {
                     headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
                     headerTintColor: 'white',
                 }}>
-                <Stack.Screen name="Login" component={Login}
+                <Stack.Screen
+                    name="Login"
+                    component={Login}
                     options={{ headerShown: false }} />
-                <Stack.Screen name="Dashboard" component={Dashboard}
+                <Stack.Screen
+                    name="Dashboard"
+                    component={Dashboard}
                     options={({ navigation }) => ({
                         headerBackVisible: false,
                         headerRight: () => (
@@ -66,8 +70,8 @@ function Main() {
                                     clearAppData();
                                     navigation.reset({
                                         index: 0,
-                                        routes: [{name: 'Login'}],
-                                      });
+                                        routes: [{ name: 'Login' }],
+                                    });
                                 }}
                                 title="Logout"
                                 color={GlobalStyles.colors.primary500}
@@ -78,5 +82,4 @@ function Main() {
         </NavigationContainer>
     );
 }
-
 export default Main;

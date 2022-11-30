@@ -3,7 +3,8 @@ import { GlobalStyles } from "../Utils/Styles";
 
 function Button({ children, onPress, mode, style, isEnable }) {
     return (
-        <View style={style}>
+        <View
+            style={style}>
             <Pressable
                 disabled={isEnable}
                 onPress={onPress}
@@ -14,14 +15,13 @@ function Button({ children, onPress, mode, style, isEnable }) {
                     mode === 'flat' || isEnable && styles.flat]}>
                     <Text
                         style={[styles.buttonText,
-                            mode === 'flat' || isEnable && styles.flatText]}>
+                        mode === 'flat' || isEnable && styles.flatText]}>
                         {children}
                     </Text>
                 </View>
             </Pressable>
         </View>);
 }
-export default Button;
 
 const styles = StyleSheet.create({
     button: {
@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
     },
     pressed: {
         opacity: 0.75,
-       // backgroundColor: GlobalStyles.colors.primary100,
+        // backgroundColor: GlobalStyles.colors.primary100,
         borderRadius: 4,
         padding: 2,
     }
 });
+export default Button;

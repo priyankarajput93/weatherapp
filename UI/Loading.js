@@ -2,9 +2,13 @@ import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { GlobalStyles } from "../Utils/Styles";
 
 function Loading() {
-    return (<View style={style.container}>
-        <ActivityIndicator size="large" color={GlobalStyles.colors.primary800} />
-    </View>);
+    return (
+        <View
+            style={style.container}>
+            <ActivityIndicator
+                size="large"
+                color={GlobalStyles.colors.primary800} />
+        </View>);
 }
 
 export default Loading;

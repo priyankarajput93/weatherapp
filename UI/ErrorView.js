@@ -3,13 +3,18 @@ import { GlobalStyles } from "../Utils/Styles";
 
 function ErrorView({ heading, message }) {
     return (
-        <View style={style.container}>
-            <Text style={style.mainText}>{heading}</Text>
-            <Text style={style.text}>{message}</Text>
+        <View
+            style={style.container}>
+            <Text
+                style={style.mainText}>
+                {heading}
+            </Text>
+            <Text
+                style={style.text}>
+                {message}
+            </Text>
         </View>);
 }
-
-export default ErrorView;
 
 const style = StyleSheet.create({
     container: {
@@ -25,7 +30,8 @@ const style = StyleSheet.create({
     },
     text: {
         marginTop: 20,
-         fontSize: 16,
+        fontSize: 16,
         color: GlobalStyles.colors.error500
     },
 });
+export default ErrorView;

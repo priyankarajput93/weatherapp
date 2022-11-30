@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { View, Text, PermissionsAndroid, Button, FlatList, StyleSheet, Image } from "react-native";
+import { useEffect } from "react";
+import { View, Text, PermissionsAndroid, FlatList, StyleSheet, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../redux/Reducers";
 import { GlobalStyles } from "../Utils/Styles";
@@ -22,7 +22,9 @@ function Dashboard() {
   const lon = '77.3910';
 
   function removeDuplicate() {
+
     const weatherDataList = [];
+
     for (let i = 0; i < data.list.length; i++) {
       if (i < (data.list.length - 1)) {
         if (getDayOfWeek(data.list[i].dt_txt) !== getDayOfWeek(data.list[i + 1].dt_txt)) {
@@ -105,7 +107,8 @@ function Dashboard() {
   }, []);
 
   const renderItem = ({ item }) => (
-    <View style={style.itemContainer}>
+    <View
+      style={style.itemContainer}>
       <Text style={style.dayText}>
         {getNameOfDayOfWeek(getDayOfWeek(item.dt_txt))}
       </Text>
@@ -113,10 +116,12 @@ function Dashboard() {
         style={style.tinyLogo}
         source={{ uri: getImageUrl(item.weather[0].icon) }}
       />
-      <Text style={style.weatherText}>
+      <Text
+        style={style.weatherText}>
         {item.weather[0].main}
       </Text>
-      <Text style={style.tempText}>
+      <Text
+        style={style.tempText}>
         {convertKelvinToCelcious(item.main.temp)}{'\u00b0'}
       </Text>
     </View>
@@ -135,17 +140,22 @@ function Dashboard() {
     );
   } else if (status === 'succeeded') {
     return (
-      <View style={style.listContainer}>
-        <Text style={style.todayText}>
+      <View
+        style={style.listContainer}>
+        <Text
+          style={style.cityText}>
           {data.city.name}
         </Text>
-        <Text style={style.todayTempText}>
+        <Text
+          style={style.todayTempText}>
           {data.list[0].weather[0].main}
         </Text>
-        <Text style={style.minTempText}>
+        <Text
+          style={style.minTempText}>
           H:{convertKelvinToCelcious(data.list[0].main.temp_max)}{'\u00b0'}  L:{convertKelvinToCelcious(data.list[0].main.temp_min)}{'\u00b0'}
         </Text>
-        <FlatList data={removeDuplicate()}
+        <FlatList
+          data={removeDuplicate()}
           keyExtractor={item => item.dt}
           renderItem={renderItem}
         >
@@ -166,7 +176,7 @@ const style = StyleSheet.create({
   listContainer: {
     flex: 1.9,
   },
-  todayText: {
+  cityText: {
     fontSize: 28,
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
@@ -178,7 +188,7 @@ const style = StyleSheet.create({
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
     textAlign: 'center',
-    marginVertical: 8
+    marginVertical: 6
   },
   dayText: {
     fontSize: 16,
@@ -204,6 +214,7 @@ const style = StyleSheet.create({
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
     textAlign: 'center',
+    marginBottom:10
   },
   itemContainer: {
     backgroundColor: 'white',
