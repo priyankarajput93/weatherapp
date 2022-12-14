@@ -1,17 +1,23 @@
-import { useEffect } from "react";
-import { View, Text, PermissionsAndroid, FlatList, StyleSheet, Image } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../src/redux/Reducers";
-import { GlobalStyles } from "../utils/Styles";
-import { weekDay , imageUrl} from "../utils/Constants";
-import Geolocation from "react-native-geolocation-service";
-import Loading from "../ui/Loading";
-import ErrorView from "../ui/ErrorView";
+import {useEffect} from 'react';
+import {
+  View,
+  Text,
+  PermissionsAndroid,
+  FlatList,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {GlobalStyles} from '../utils/Styles';
+import {weekDay, imageUrl} from '../utils/Constants';
+import Geolocation from 'react-native-geolocation-service';
+import Loading from '../ui/Loading';
+import ErrorView from '../ui/ErrorView';
+import {getData} from '../redux/Reducers';
 
 function Dashboard() {
-
   const dispatch = useDispatch();
-  const { appReducer } = useSelector((state) => state);
+  const {appReducer} = useSelector(state => state);
 
   const status = appReducer.status;
   const error = appReducer.error;
@@ -25,8 +31,11 @@ function Dashboard() {
   function removeDuplicate() {
     const weatherDataList = [];
     for (let i = 0; i < data.list.length; i++) {
-      if (i < (data.list.length - 1)) {
-        if (getDayOfWeek(data.list[i].dt_txt) !== getDayOfWeek(data.list[i + 1].dt_txt)) {
+      if (i < data.list.length - 1) {
+        if (
+          getDayOfWeek(data.list[i].dt_txt) !==
+          getDayOfWeek(data.list[i + 1].dt_txt)
+        ) {
           weatherDataList.push(data.list[i]);
         }
       }
@@ -56,7 +65,7 @@ function Dashboard() {
     } catch (err) {
       return false;
     }
-  }
+  };
 
   // function to get current location's lat long of user if user allow location permission otherwise default lat, long will be used
   const getLocation = () => {
@@ -67,23 +76,23 @@ function Dashboard() {
           position => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            dispatch(getData({ lat, lon }));
+            dispatch(getData({lat, lon}));
           },
           error => {
             console.log(error.code, error.message);
           },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
         );
       } else {
-        dispatch(getData({ lat, lon }))
+        dispatch(getData({lat, lon}));
       }
     });
-  }
+  };
 
   // convert kelvin to celcious
   function convertKelvinToCelcious(kelvin) {
-    var number = (kelvin - 273.15);
-    const result = number - number % 1;
+    var number = kelvin - 273.15;
+    const result = number - (number % 1);
     return result;
   }
 
@@ -112,23 +121,19 @@ function Dashboard() {
     getLocation();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <View
-      style={style.itemContainer}>
+  const renderItem = ({item}) => (
+    <View style={style.itemContainer}>
       <Text style={style.dayText}>
         {getNameOfDayOfWeek(getDayOfWeek(item.dt_txt))}
       </Text>
       <Image
         style={style.tinyLogo}
-        source={{ uri: getImageUrl(item.weather[0].icon) }}
+        source={{uri: getImageUrl(item.weather[0].icon)}}
       />
-      <Text
-        style={style.weatherText}>
-        {item.weather[0].main}
-      </Text>
-      <Text
-        style={style.tempText}>
-        {convertKelvinToCelcious(item.main.temp)}{'\u00b0'}
+      <Text style={style.weatherText}>{item.weather[0].main}</Text>
+      <Text style={style.tempText}>
+        {convertKelvinToCelcious(item.main.temp)}
+        {'\u00b0'}
       </Text>
     </View>
   );
@@ -141,37 +146,25 @@ function Dashboard() {
       />
     );
   } else if (status === 'loading') {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   } else if (status === 'succeeded') {
     return (
-      <View
-        style={style.listContainer}>
-        <Text
-          style={style.cityText}>
-          {data.city.name}
-        </Text>
-        <Text
-          style={style.todayTempText}>
-          {data.list[0].weather[0].main}
-        </Text>
-        <Text
-          style={style.minTempText}>
-          H:{convertKelvinToCelcious(data.list[0].main.temp_max)}{'\u00b0'}  L:{convertKelvinToCelcious(data.list[0].main.temp_min)}{'\u00b0'}
+      <View style={style.listContainer}>
+        <Text style={style.cityText}>{data.city.name}</Text>
+        <Text style={style.todayTempText}>{data.list[0].weather[0].main}</Text>
+        <Text style={style.minTempText}>
+          H:{convertKelvinToCelcious(data.list[0].main.temp_max)}
+          {'\u00b0'} L:{convertKelvinToCelcious(data.list[0].main.temp_min)}
+          {'\u00b0'}
         </Text>
         <FlatList
           data={removeDuplicate()}
           keyExtractor={item => item.dt}
-          renderItem={renderItem}
-        >
-        </FlatList>
+          renderItem={renderItem}></FlatList>
       </View>
-    )
+    );
   } else {
-    <Text style={style.noDataText}>
-      No Data
-    </Text>
+    <Text style={style.noDataText}>No Data</Text>;
   }
 }
 const style = StyleSheet.create({
@@ -187,14 +180,14 @@ const style = StyleSheet.create({
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
     textAlign: 'center',
-    marginTop: 12
+    marginTop: 12,
   },
   todayTempText: {
     fontSize: 32,
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
     textAlign: 'center',
-    marginVertical: 6
+    marginVertical: 6,
   },
   dayText: {
     fontSize: 16,
@@ -220,7 +213,7 @@ const style = StyleSheet.create({
     fontStyle: 'bold',
     color: GlobalStyles.colors.primary900,
     textAlign: 'center',
-    marginBottom:10
+    marginBottom: 10,
   },
   itemContainer: {
     backgroundColor: 'white',
@@ -230,7 +223,7 @@ const style = StyleSheet.create({
     flex: 1,
     marginHorizontal: 12,
     marginVertical: 12,
-    padding: 24
+    padding: 24,
   },
   tinyLogo: {
     flex: 0.1,
@@ -243,5 +236,5 @@ const style = StyleSheet.create({
     textAlign: 'center',
     color: GlobalStyles.colors.primary900,
   },
-})
+});
 export default Dashboard;

@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { Alert, BackHandler, ImageBackground, StatusBar, StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { Store } from "./src/redux/Store";
-import Main from "./Screens/Main";
-import { GlobalStyles } from "./Utils/Styles";
+import Main from "./src/screens/Main";
+import { GlobalStyles } from "./src/utils/Styles";
 
 const App = () => {
 
   useEffect(() => {
 
+    // this method will be called when device's backpress is pressed
     const backAction = () => {
-      Alert.alert("Close ", "Do you want to close the application?", [
+      Alert.alert("Close App?", "Do you want to close the application?", [
         {
           text: "Cancel",
           onPress: () => null,
@@ -32,7 +33,7 @@ const App = () => {
     <>
       <StatusBar barStyle={'light'} backgroundColor={GlobalStyles.colors.primary800} />
       <ImageBackground
-        source={require('./assets/images/background.jpg')}
+        source={require('./src/assets/images/background.jpg')}
         resizeMode='cover'
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}>
