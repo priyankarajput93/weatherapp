@@ -1,11 +1,10 @@
 import { TextInput, StyleSheet, View, Text, Image, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { GlobalStyles } from "../Utils/Styles";
-import { useEffect } from "react";
-import Button from "../UI/Button";
+import { GlobalStyles } from "../utils/Styles";
+import Button from "../ui/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addUserName, addUserPassword } from "../redux/Reducers";
+import { addUserName, addUserPassword } from "../src/redux/Reducers";
 
 function Login({ navigation }) {
 
@@ -15,6 +14,7 @@ function Login({ navigation }) {
 
     const dispatch = useDispatch();
 
+    // store user to storage
     const storeUser = async () => {
         const userData = {
             name: enteredName,
@@ -27,6 +27,7 @@ function Login({ navigation }) {
         }
     };
 
+    // this method will be called when user click on login button
     function login() {
         storeUser();
         navigation.navigate("Dashboard")

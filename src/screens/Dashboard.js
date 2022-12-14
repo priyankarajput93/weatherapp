@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { View, Text, PermissionsAndroid, FlatList, StyleSheet, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../redux/Reducers";
-import { GlobalStyles } from "../Utils/Styles";
-import { weekDay } from "../Utils/Constants";
+import { getData } from "../src/redux/Reducers";
+import { GlobalStyles } from "../utils/Styles";
+import { weekDay , imageUrl} from "../utils/Constants";
 import Geolocation from "react-native-geolocation-service";
-import Loading from "../UI/Loading";
-import ErrorView from "../UI/ErrorView";
+import Loading from "../ui/Loading";
+import ErrorView from "../ui/ErrorView";
 
 function Dashboard() {
 
@@ -21,10 +21,9 @@ function Dashboard() {
   const lat = '28.5355';
   const lon = '77.3910';
 
+  // function to remove duplicate dates from the response
   function removeDuplicate() {
-
     const weatherDataList = [];
-
     for (let i = 0; i < data.list.length; i++) {
       if (i < (data.list.length - 1)) {
         if (getDayOfWeek(data.list[i].dt_txt) !== getDayOfWeek(data.list[i + 1].dt_txt)) {
@@ -35,6 +34,7 @@ function Dashboard() {
     return weatherDataList;
   }
 
+  // function to request for locaion permission
   const requestLocPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -58,6 +58,7 @@ function Dashboard() {
     }
   }
 
+  // function to get current location's lat long of user if user allow location permission otherwise default lat, long will be used
   const getLocation = () => {
     const result = requestLocPermission();
     result.then(res => {
@@ -79,17 +80,20 @@ function Dashboard() {
     });
   }
 
+  // convert kelvin to celcious
   function convertKelvinToCelcious(kelvin) {
     var number = (kelvin - 273.15);
     const result = number - number % 1;
     return result;
   }
 
+  // get day of week from date
   function getDayOfWeek(date) {
     const day = new Date(date);
     return day.getDay();
   }
 
+  // get name of the day from week
   function getNameOfDayOfWeek(day) {
     var currentDate = new Date();
     if (day == currentDate.getDay()) {
@@ -98,8 +102,10 @@ function Dashboard() {
       return weekDay[day];
     }
   }
+
+  // return image url for weather
   function getImageUrl(image) {
-    return 'http://openweathermap.org/img/w/' + image + '.png';
+    return imageUrl + image + '.png';
   }
 
   useEffect(() => {

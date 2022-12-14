@@ -1,4 +1,4 @@
-package com.weatherapp.newarchitecture.modules;
+package com.weatherapplive.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

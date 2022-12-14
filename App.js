@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Alert, BackHandler, ImageBackground, StatusBar, StyleSheet } from "react-native";
 import { Provider } from "react-redux";
-import { Store } from "./redux/Store";
+import { Store } from "./src/redux/Store";
 import Main from "./Screens/Main";
 import { GlobalStyles } from "./Utils/Styles";
 

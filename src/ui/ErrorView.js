@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text } from "react-native";
-import { GlobalStyles } from "../Utils/Styles";
+import { GlobalStyles } from "../utils/Styles";
 
 function ErrorView({ heading, message }) {
     return (

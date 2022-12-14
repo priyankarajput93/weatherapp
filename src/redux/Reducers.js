@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { API_KEY, BASE_URL } from "../../utils/Constants";
 
-const API_KEY = 'b11c778d23934dfd116088a9e47c93be';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast?';
-
+// method to get data from API
 export const getData = createAsyncThunk('appData/getAppData', async (params) => {
-
     const { lat, lon } = params;
     try {
         const response = await fetch(BASE_URL + `lat=${lat}` + `&lon=${lon}` + `&appid=${API_KEY}`);
@@ -52,11 +50,9 @@ const appSlice = createSlice({
                     state.status = "succeeded";
                     state.data = (action.payload);
                 }
-                console.log(action.payload);
             })
             .addCase(getData.rejected, (state, action) => {
                 state.status = "failed";
-                console.log('failed');
                 state.error = action.error.message;
             })
     }

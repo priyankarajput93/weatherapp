@@ -15,6 +15,5 @@ export const GlobalStyles = {
         gray700: '#dcdcdc',
         gray100: '#E8E8E8',
         green100:'#4CBB17'
-
     }
 }

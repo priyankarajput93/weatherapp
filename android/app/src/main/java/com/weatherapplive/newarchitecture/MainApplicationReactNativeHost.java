@@ -1,4 +1,4 @@
-package com.weatherapp.newarchitecture;
+package com.weatherapplive.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.weatherapp.BuildConfig;
-import com.weatherapp.newarchitecture.components.MainComponentsRegistry;
-import com.weatherapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.weatherapplive.BuildConfig;
+import com.weatherapplive.newarchitecture.components.MainComponentsRegistry;
+import com.weatherapplive.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

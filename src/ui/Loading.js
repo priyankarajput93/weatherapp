@@ -1,5 +1,5 @@
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { GlobalStyles } from "../Utils/Styles";
+import { GlobalStyles } from "../../utils/Styles";
 
 function Loading() {
     return (

@@ -1,4 +1,4 @@
-package com.weatherapp.newarchitecture.components;
+package com.weatherapplive.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

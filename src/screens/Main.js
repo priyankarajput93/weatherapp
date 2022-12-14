@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./Login";
-import { clearData } from "../redux/Reducers";
+import { clearData } from "../src/redux/Reducers";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native";
 import Dashboard from "./Dashboard";
-import { GlobalStyles } from "../Utils/Styles";
+import { GlobalStyles } from "../utils/Styles";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +28,7 @@ function Main() {
         getUser();
     })
 
+    // get saved user, if exists, app will open dashboard otherwise login screen will be displayed
     const getUser = async () => {
         try {
             const savedUser = await AsyncStorage.getItem("userData");
@@ -36,7 +37,8 @@ function Main() {
             console.log(error);
         }
     };
-
+    
+// clear stored data , method called on logout click
     const clearAppData = async function () {
         try {
             const keys = await AsyncStorage.getAllKeys();
